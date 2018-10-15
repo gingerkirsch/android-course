@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">AulasJava</string>
+    <string name="test">Test String</string>
+    <string name="counter">OK</string>
+    <string name="clicks">Clicks:</string>
+    
+    <plurals name="clicks">
+        <item quantity="one">%d click</item>
+        <item quantity="other">%d clicks</item>
+    </plurals>
+    <string name="next_activity">Next Activity</string>
+    <string name="needs_clicks">clicks are needed to continue!</string>
+    <string name="title">Title</string>
+    <string name="show_notification">Show notification</string>
+</resources>

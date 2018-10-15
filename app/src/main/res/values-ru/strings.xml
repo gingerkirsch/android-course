@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AulasJava</string>
+    <string name="test">Тест</string>
+    <string name="counter">OK</string>
+    <string name="clicks">Клики:</string>
+    <string name="next_activity">Следующая Активити</string>
+    <string name="needs_clicks">кликов нужно чтобы продолжить!</string>
+</resources>
