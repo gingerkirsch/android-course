@@ -1,6 +1,15 @@
 package com.example.growin.aulasjava;
 
+import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +24,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     final static String EXTRA_CLICKS = "clicks";
     private Button counter_btn, next_activity_btn;
     private TextView counter_text;
-    private int clicksCounter = 0;
+    private int clicks = 0;
+    private Toast toast;
 
     @Override
     protected void onStart() {
@@ -29,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStop();
 
         Log.v(TAG,"onStop");
+        DataManager.saveIntPreference(DataManager.CLICKS, clicks, this);
     }
 
     @Override
@@ -50,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        clicks = DataManager.getIntPreference(DataManager.CLICKS, this);
+
         counter_btn = findViewById(R.id.button1);
         counter_text = findViewById(R.id.counter_text);
         counter_btn.setOnClickListener(this);
@@ -57,11 +70,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         next_activity_btn = findViewById(R.id.next_act);
         next_activity_btn.setOnClickListener(this);
 
+        refreshBackground(findViewById(R.id.background), this);
+        refreshCounter();
+
+        findViewById(R.id.reset).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                clicks = 0;
+                refreshCounter();
+            }
+        });
+
         counter_btn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v){
-                clicksCounter = clicksCounter + 5;
-                refreshButton();
+                clicks = clicks + 5;
+                refreshCounter();
                 return true;
             }
         });
@@ -69,34 +93,78 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.v(TAG,"onCreate");
     }
 
+    public void onBackPressed(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getResources().getString(R.string.exit))
+                .setTitle("Already leaving?");
+
+        builder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                MainActivity.this.finish();
+            }
+
+        });
+        builder.setNegativeButton(getResources().getString(R.string.no), null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     @Override
     public void onClick(View v) {
         if (v == counter_btn) {
-            clicksCounter++;
-            refreshButton();
+            clicks++;
+            refreshCounter();
         }
         if(v == next_activity_btn){
             goToMain2();
         }
     }
 
-    private void refreshButton(){
-        String text = getResources().getQuantityString(R.plurals.clicks, clicksCounter, clicksCounter);
+    private void refreshCounter(){
+        String text = getResources().getQuantityString(R.plurals.clicks, clicks, clicks);
         counter_text.setText(text);
     }
 
+    public static void refreshBackground(View view, Context context){
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+        String color = settings.getString("background", context.getResources().getString(R.string.grey));
+
+        if (color.equals(context.getResources().getString(R.string.grey))) {
+            view.setBackgroundResource(R.color.grey);
+        }
+
+        if (color.equals(context.getResources().getString(R.string.yellow))) {
+            view.setBackgroundResource(R.color.yellow);
+        }
+
+        if (color.equals(context.getResources().getString(R.string.purple))) {
+            view.setBackgroundResource(R.color.purple);
+        }
+
+    }
+
     public void goToMain2(){
-        if (clicksCounter < 5){
-            showToast((5 - clicksCounter) + " " + getResources().getString(R.string.needs_clicks));
+        if (clicks < 5){
+            showToast((5 - clicks) + " " + getResources().getString(R.string.needs_clicks));
             return;
         }
         Intent intent = new Intent ( this, Main2Activity.class);
-        intent.putExtra(EXTRA_CLICKS, clicksCounter);
+        intent.putExtra(EXTRA_CLICKS, clicks);
         startActivity(intent);
         this.finish();
     }
 
     private void showToast(String message){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        if(toast != null && toast.getView().isShown()){
+            toast.cancel();
+        }
+
+        toast = Toast.makeText(
+                getApplicationContext(), message, Toast.LENGTH_SHORT
+        );
+
+        toast.show();
     }
+
 }

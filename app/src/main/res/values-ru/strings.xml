@@ -6,4 +6,18 @@
     <string name="clicks">Клики:</string>
     <string name="next_activity">Следующая Активити</string>
     <string name="needs_clicks">кликов нужно чтобы продолжить!</string>
+    <string name="changeColorBlue">Change Color to Blue?</string>
+    <string name="changeColorRed">Change color to Red?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="title">Название</string>
+    <string name="show_notification">Показать уведомление</string>
+    <string name="dialog">Поменять цвет</string>
+    <string name="exit">Вы уверены, что хотите выйти?</string>
+    <string name="settings">Настройки</string>
+    <string name="grey">Серый</string>
+    <string name="yellow">Желтый</string>
+    <string name="purple">Фиолетовый</string>
+    <string name="background">Фон</string>
+    <string name="reset">Обнулить счетчик</string>
 </resources>

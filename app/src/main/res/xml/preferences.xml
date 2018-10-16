@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="background"
+        android:title="@string/background"
+        android:dialogTitle="@string/background"
+        android:entries="@array/background_list"
+        android:entryValues="@array/background_list"
+        android:defaultValue="@string/grey"/>
+</PreferenceScreen>

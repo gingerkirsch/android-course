@@ -6,4 +6,18 @@
     <string name="clicks">Clicos:</string>
     <string name="next_activity">Proxima Activity</string>
     <string name="needs_clicks">clicos são precisos para continuar!</string>
+    <string name="changeColorBlue">Mudar a cor para o azul?</string>
+    <string name="changeColorRed">Mudar a cor para o vermelho?</string>
+    <string name="title">Título</string>
+    <string name="show_notification">Mostrar a notificação</string>
+    <string name="dialog">Mudar a cor</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="exit">Tem certeza que quer sair?</string>
+    <string name="settings">Definições</string>
+    <string name="grey">Cinzento</string>
+    <string name="yellow">Amarelo</string>
+    <string name="purple">Roxa</string>
+    <string name="background">Fondo</string>
+    <string name="reset">Reiniciar o contador</string>
 </resources>

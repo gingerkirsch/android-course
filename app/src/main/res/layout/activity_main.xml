@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/background"
     tools:context=".MainActivity">
 
     <Button
@@ -33,6 +34,18 @@
         android:layout_below="@+id/counter_text"
         android:layout_margin="10dp"
         android:text="@string/next_activity"
+        android:background="@color/blue"
+        android:textColor="@color/white"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/reset"
+        android:layout_below="@+id/next_act"
+        android:layout_margin="10dp"
+        android:text="@string/reset"
         android:background="@color/blue"
         android:textColor="@color/white"/>
 
