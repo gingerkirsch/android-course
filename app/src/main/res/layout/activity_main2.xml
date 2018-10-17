@@ -49,4 +49,15 @@
         android:background="@color/blue"
         android:textColor="@color/white"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/keyboard"
+        android:layout_below="@+id/settings"
+        android:layout_margin="10dp"
+        android:text="@string/keyboard"
+        android:background="@color/blue"
+        android:textColor="@color/white"/>
+
 </RelativeLayout>

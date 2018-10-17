@@ -53,6 +53,13 @@ public class Main2Activity extends AppCompatActivity {
                 Main2Activity.this.finish();
             }
         });
+        findViewById(R.id.keyboard).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2Activity.this, KeyboardActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         counter.setText(getResources().getQuantityString(R.plurals.clicks, clicks, clicks));
@@ -75,7 +82,6 @@ public class Main2Activity extends AppCompatActivity {
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent =
                 stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
-        //PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(resultPendingIntent);
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(0, mBuilder.build());

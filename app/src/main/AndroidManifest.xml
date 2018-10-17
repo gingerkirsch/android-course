@@ -17,7 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".Main2Activity" />
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".SettingsActivity" />
+        <activity
+            android:name=".KeyboardActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".AddCarActivity"></activity>
     </application>
 
 </manifest>
