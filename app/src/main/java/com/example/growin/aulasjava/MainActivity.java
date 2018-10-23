@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private final String TAG = "MainActivity";
     final static String EXTRA_CLICKS = "clicks";
@@ -99,7 +100,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         Log.v(TAG,"onCreate");
+
+        //applyFont();
     }
+
+
+    /*private void applyFont(){
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "font.otf");
+        counter_btn.setTypeface(typeface);
+        next_activity_btn.setTypeface(typeface);
+
+        ((Button)findViewById(R.id.add_car)).setTypeface(typeface);
+        ((Button)findViewById(R.id.reset)).setTypeface(typeface);
+        ((TextView)findViewById(R.id.counter_text)).setTypeface(typeface);
+        FontManager fontManager = new FontManager();
+        fontManager.applyFontToActivity(findViewById(R.id.background), "font.otf", this);
+    }*/
 
     public void onBackPressed(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -123,6 +139,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == counter_btn) {
             clicks++;
             refreshCounter();
+            customToast.setTextSize(30);
+            customToast.show("New click " + clicks, getApplicationContext());
         }
         if(v == next_activity_btn){
             goToMain2();

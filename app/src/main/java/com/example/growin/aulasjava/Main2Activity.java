@@ -14,7 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-public class Main2Activity extends AppCompatActivity {
+public class Main2Activity extends BaseActivity {
     private int clicks = 0;
     private boolean isRed = false;
 
@@ -30,6 +30,7 @@ public class Main2Activity extends AppCompatActivity {
 
         Intent extData = getIntent();
         clicks = extData.getIntExtra(MainActivity.EXTRA_CLICKS, 0);
+        isRed = DataManager.getBooleanPreference(DataManager.IS_RED, this);
 
         findViewById(R.id.show_notification).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +64,23 @@ public class Main2Activity extends AppCompatActivity {
 
 
         counter.setText(getResources().getQuantityString(R.plurals.clicks, clicks, clicks));
+
+        MainActivity.refreshBackground(findViewById(R.id.background), this);
+
+        TextView textScroll = findViewById(R.id.textScroll);
+        StringBuilder txtScroll = new StringBuilder();
+        for (int i = 0; i <= clicks; i++) {
+            txtScroll.append(i + "\n");
+        }
+        textScroll.setText(txtScroll);
+
+        refreshColors();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        DataManager.saveBooleanPreference("IS_RED", isRed, this);
     }
 
     public void onBackPressed(){
@@ -112,6 +130,8 @@ public class Main2Activity extends AppCompatActivity {
     private void refreshColors(){
         findViewById(R.id.show_notification).setBackgroundResource(isRed ? R.color.red : R.color.blue);
         findViewById(R.id.dialog).setBackgroundResource(isRed ? R.color.red : R.color.blue);
-
+        findViewById(R.id.settings).setBackgroundResource(isRed ? R.color.red : R.color.blue);
+        findViewById(R.id.keyboard).setBackgroundResource(isRed ? R.color.red : R.color.blue);
+        findViewById(R.id.textScroll).setBackgroundResource(isRed ? R.color.red : R.color.blue);
     }
 }

@@ -46,6 +46,7 @@
         android:layout_below="@+id/next_act"
         android:layout_margin="10dp"
         android:text="@string/reset"
+        android:textAllCaps="false"
         android:background="@color/blue"
         android:textColor="@color/white"/>
 

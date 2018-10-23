@@ -10,7 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class AddCarActivity extends AppCompatActivity {
+public class AddCarActivity extends BaseActivity {
     EditText edit_brand, edit_model, edit_owner;
     Button enter;
     CheckBox noOwnerCheck;
@@ -38,11 +38,10 @@ public class AddCarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Resources res = getResources();
+                String owner_text = noOwnerCheck.isChecked() ? res.getString(R.string.noOwner) :
+                        res.getString(R.string.owner) + ":" + edit_owner.getText().toString();
                 String text = res.getString(R.string.brand) + ":" + edit_brand.getText().toString() + " " +
-                        res.getString(R.string.model) + ":" + edit_model.getText().toString();
-                if (!noOwnerCheck.isChecked()) {
-                    text += " " + res.getString(R.string.owner) + ":" + edit_owner.getText().toString();
-                }
+                        res.getString(R.string.model) + ":" + edit_model.getText().toString() + " " + owner_text;
                 Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
             }
         });
