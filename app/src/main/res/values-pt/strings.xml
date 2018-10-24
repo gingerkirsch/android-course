@@ -20,4 +20,11 @@
     <string name="purple">Roxa</string>
     <string name="background">Fondo</string>
     <string name="reset">Reiniciar o contador</string>
+    <string name="keyboard">Teclado</string>
+    <string name="enter">Entrar</string>
+    <string name="brand">Marca</string>
+    <string name="owner">Proprietario</string>
+    <string name="model">Modelo</string>
+    <string name="add_car">Adicionar o carro</string>
+    <string name="noOwner">Sem proprietario</string>
 </resources>

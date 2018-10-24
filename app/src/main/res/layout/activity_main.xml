@@ -51,13 +51,35 @@
         android:textColor="@color/white"/>
 
     <Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/add_car"
+    android:layout_below="@+id/reset"
+    android:layout_margin="10dp"
+    android:text="@string/add_car"
+    android:background="@color/blue"
+    android:textColor="@color/white"/>
+
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:id="@+id/add_car"
-        android:layout_below="@+id/reset"
+        android:id="@+id/makeCall"
+        android:layout_below="@+id/add_car"
         android:layout_margin="10dp"
-        android:text="@string/add_car"
+        android:text="@string/makeCall"
+        android:background="@color/blue"
+        android:textColor="@color/white"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/painter"
+        android:layout_below="@+id/makeCall"
+        android:layout_margin="10dp"
+        android:text="@string/painter"
         android:background="@color/blue"
         android:textColor="@color/white"/>
 

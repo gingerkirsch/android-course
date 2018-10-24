@@ -20,4 +20,11 @@
     <string name="purple">Фиолетовый</string>
     <string name="background">Фон</string>
     <string name="reset">Обнулить счетчик</string>
+    <string name="keyboard">Клавиатура</string>
+    <string name="enter">Ввод</string>
+    <string name="brand">Марка</string>
+    <string name="owner">Владелец</string>
+    <string name="model">Модель</string>
+    <string name="add_car">Добавить машину</string>
+    <string name="noOwner">Без владельца</string>
 </resources>

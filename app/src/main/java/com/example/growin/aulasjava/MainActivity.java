@@ -1,5 +1,6 @@
 package com.example.growin.aulasjava;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -8,9 +9,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +29,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private final String TAG = "MainActivity";
     final static String EXTRA_CLICKS = "clicks";
+    final static int PERMISSION_CALL_PHONE = 1;
     private Button counter_btn, next_activity_btn;
     private TextView counter_text;
     private int clicks = 0;
@@ -101,9 +108,57 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         Log.v(TAG,"onCreate");
 
+        findViewById(R.id.makeCall).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
+                } else {
+                    makeCall();
+                }
+            }
+        });
+
+        findViewById(R.id.painter).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MainActivity.this, PainterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.painter).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MainActivity.this, PainterActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.left_in, R.anim.left_out);
+                MainActivity.this.finish();
+            }
+        });
+
         //applyFont();
     }
 
+    private void makeCall(){
+        // em versão 22 bastava só isto, não era preciso pedir a permission
+        Intent call = new Intent();
+        call.setAction(Intent.ACTION_CALL);
+        call.setData(Uri.parse("tel:211234567"));
+        startActivity(call);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+        switch (requestCode){
+            case PERMISSION_CALL_PHONE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    makeCall();
+                } else {
+                    customToast.show(getResources().getString(R.string.permissionDenied), getApplicationContext());
+                }
+        }
+    }
 
     /*private void applyFont(){
         Typeface typeface = Typeface.createFromAsset(getAssets(), "font.otf");

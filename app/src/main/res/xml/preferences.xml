@@ -7,4 +7,10 @@
         android:entries="@array/background_list"
         android:entryValues="@array/background_list"
         android:defaultValue="@string/grey"/>
+
+    <CheckBoxPreference
+        android:key="skipIntro"
+        android:title="@string/skipIntro"
+        android:checked="false"/>
+
 </PreferenceScreen>
